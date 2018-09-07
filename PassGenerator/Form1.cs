@@ -37,7 +37,18 @@ namespace PassGenerator
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            if (textBox2.Text == "") this.toolStripStatusLabel1.Text = "Пароль не сгенерирован!";
+            else
+            {
+                saveFileDialog1.Filter = "Text file|*.txt";
+                saveFileDialog1.Title = "Сохранить пароль";
+                saveFileDialog1.ShowDialog();
+                if (saveFileDialog1.FileName != "")
+                {
+                    System.IO.File.WriteAllText(saveFileDialog1.FileName, textBox2.Text);
+                    this.toolStripStatusLabel1.Text = "Пароль сохранён в файл!";
+                }
+            } 
         }
 
         private void button3_Click(object sender, EventArgs e)
