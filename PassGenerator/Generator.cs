@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Security.Cryptography;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PassGenerator
 {
@@ -26,18 +21,14 @@ namespace PassGenerator
             if (specialCharOn) passSimbols += specialСhar;
         }
 
-        public string GetPass(int length)
+        public string GetPassword(int length)
         {
+            if (passSimbols == null) return default;
             string password = null;
-            if (passSimbols == null) return "";
-            else
+            Random index = new Random();
+            for (int i = 0; i < length; i++)
             {
-                
-                Random index = new Random();
-                for (int i = 0; i < length; i++)
-                {
-                    password += passSimbols[index.Next(0, passSimbols.Length)];
-                }
+                password += passSimbols[index.Next(0, passSimbols.Length)];
             }
             return password;
         }

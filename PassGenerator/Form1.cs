@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PassGenerator
@@ -37,8 +30,8 @@ namespace PassGenerator
                     checkBox1.Checked,
                     checkBox2.Checked,
                     checkBox3.Checked
-                    ).GetPass(int.Parse(textBox1.Text));
-                this.toolStripStatusLabel1.Text = "Пароль сгенерирован и скопирован в буфер!";
+                    ).GetPassword(int.Parse(textBox1.Text));
+                if (textBox2.Text != "") this.toolStripStatusLabel1.Text = "Пароль сгенерирован!";
             }    
         }
 
@@ -55,6 +48,11 @@ namespace PassGenerator
                 Clipboard.SetText(textBox2.Text);
                 this.toolStripStatusLabel1.Text = "Пароль скопирован в буфер!";
             }               
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (int.Parse(textBox1.Text) > 256) textBox1.Text = "256";
         }
     }
 }
