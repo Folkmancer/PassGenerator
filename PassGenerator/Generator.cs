@@ -2,26 +2,17 @@
 
 namespace Folkmancer.Simple.PassGenerator
 {
-    class Generator
+    static class Generator
     {
-        private string digits = "0123456789";
-        private string latin = "abcdefghijklmnopqrstuvwxyz";
-        private string specialСhar = "!#$%&'()*+,-.:;<=>?@[]^_`{|}~";
-        private string passSimbols;
-        
-        public Generator(int typeSelected, bool digitsOn, bool latinOn, bool specialCharOn)
-        {
-            if (digitsOn) passSimbols += Digits;
-            if (latinOn)
-            {
-                if (typeSelected == 0) passSimbols += Latin;
-                else if (typeSelected == 1) passSimbols += Latin.ToUpper();
-                else passSimbols += passSimbols += Latin + Latin.ToUpper();
-            }
-            if (specialCharOn) passSimbols += SpecialСhar;
-        }
+        private static string digits = "0123456789";
+        private static string letters = "abcdefghijklmnopqrstuvwxyz";
+        private static string specialСhar = "!#$%&'()*+,-.:;<=>?@[]^_`{|}~";
 
-        public string GetLine(CharType typeSymbols = CharType.Digit, CharCase caseSymbols = CharCase.Lower)
+        public static string Digits { get => digits; }
+        public static string Letters { get => letters; }
+        public static string SpecialСhar { get => specialСhar; }
+
+        public static string GetLine(CharType typeSymbols = CharType.Digit, CharCase caseSymbols = CharCase.Lower)
         {
             switch (typeSymbols)
             {
@@ -43,28 +34,23 @@ namespace Folkmancer.Simple.PassGenerator
             }
         }
 
-        private string GetLetter(CharCase caseLetter)
+        private static string GetLetter(CharCase caseLetter)
         {
             if (caseLetter == CharCase.Lower)
             {
-                return Latin;
+                return Letters;
             }
             else if (caseLetter == CharCase.Upper)
             {
-                return Latin.ToUpper();
+                return Letters.ToUpper();
             }
             else
             {
-                return Latin + Latin.ToUpper();
+                return Letters + Letters.ToUpper();
             }
         }
 
-
-        public string Digits { get => digits; }
-        public string Latin { get => latin; }
-        public string SpecialСhar { get => specialСhar; }
-
-        public string GetPassword(int length)
+        public static string GetPassword(int length, string passSimbols)
         {
             if (passSimbols == null) return default;
             string password = null;

@@ -22,15 +22,9 @@ namespace Folkmancer.Simple.PassGenerator
             else if (!(checkBox1.Checked || checkBox2.Checked || checkBox3.Checked)) this.toolStripStatusLabel1.Text = "Не выбран тип!";
             else
             {
-                int type =
-                    radioButton1.Checked == true ? 0 :
-                    radioButton2.Checked == true ? 1 : 2;
-                textBox2.Text = new Generator(
-                    type,
-                    checkBox1.Checked,
-                    checkBox2.Checked,
-                    checkBox3.Checked
-                    ).GetPassword(int.Parse(textBox1.Text));
+                CharCase caseType = GetCharCase();
+                CharType typeType = GetCharType();
+                textBox2.Text = Generator.GetPassword(int.Parse(textBox1.Text), Generator.GetLine(typeType, caseType));
                 if (textBox2.Text != "") this.toolStripStatusLabel1.Text = "Пароль сгенерирован!";
             }    
         }
@@ -65,5 +59,23 @@ namespace Folkmancer.Simple.PassGenerator
         {
             if (int.Parse(textBox1.Text) > 256) textBox1.Text = "256";
         }
+
+        private CharType GetCharType()
+        {
+            if (checkBox1.Checked && checkBox2.Checked && checkBox3.Checked) return CharType.All;
+            else if (checkBox2.Checked && checkBox3.Checked) return CharType.LetterAndSpecial;
+            else if (checkBox1.Checked && checkBox3.Checked) return CharType.DigitAndSpecial;
+            else if (checkBox1.Checked && checkBox2.Checked) return CharType.DigitAndLetter;
+            else if (checkBox3.Checked) return CharType.Special;
+            else if (checkBox2.Checked) return CharType.Letter;
+            else return CharType.Digit;
+        }
+
+        private CharCase GetCharCase()
+        {
+            if (radioButton1.Checked) return CharCase.Lower;
+            else if (radioButton2.Checked) return CharCase.Upper;
+            else return CharCase.Both;
+        }    
     }
 }
