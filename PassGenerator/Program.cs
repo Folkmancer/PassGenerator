@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PassGenerator
+namespace Folkmancer.Simple.PassGenerator
 {
     static class Program
     {

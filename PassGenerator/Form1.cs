@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace PassGenerator
+namespace Folkmancer.Simple.PassGenerator
 {
     public partial class Form1 : Form
     {

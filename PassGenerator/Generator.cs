@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PassGenerator
+namespace Folkmancer.Simple.PassGenerator
 {
     class Generator
     {
@@ -21,6 +21,45 @@ namespace PassGenerator
             if (specialCharOn) passSimbols += SpecialСhar;
         }
 
+        public string GetLine(CharType typeSymbols = CharType.Digit, CharCase caseSymbols = CharCase.Lower)
+        {
+            switch (typeSymbols)
+            {
+                case CharType.Digit:
+                    return Digits;
+                case CharType.Letter:
+                    return GetLetter(caseSymbols);
+                case CharType.Special:
+                    return SpecialСhar;
+                case CharType.DigitAndLetter:
+                    return Digits + GetLetter(caseSymbols);
+                case CharType.DigitAndSpecial:
+                    return Digits + SpecialСhar;
+                case CharType.LetterAndSpecial:
+                    return GetLetter(caseSymbols) + SpecialСhar;
+                case CharType.All:
+                    return Digits + GetLetter(caseSymbols) + SpecialСhar;
+                default: return default;
+            }
+        }
+
+        private string GetLetter(CharCase caseLetter)
+        {
+            if (caseLetter == CharCase.Lower)
+            {
+                return Latin;
+            }
+            else if (caseLetter == CharCase.Upper)
+            {
+                return Latin.ToUpper();
+            }
+            else
+            {
+                return Latin + Latin.ToUpper();
+            }
+        }
+
+
         public string Digits { get => digits; }
         public string Latin { get => latin; }
         public string SpecialСhar { get => specialСhar; }
@@ -36,18 +75,5 @@ namespace PassGenerator
             }
             return password; 
         }
-    }
-
-    enum Case { Upper, Lower }
-
-    enum Type
-    {
-        Digit,
-        Letter,
-        Special,
-        DigitAndLetter,
-        DigitAndSpecial,
-        LetterAndSpecial,
-        All    
     }
 }

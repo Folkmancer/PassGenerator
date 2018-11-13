@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PassGenerator.Properties
+namespace Folkmancer.Simple.PassGenerator.Properties
 {
 
 

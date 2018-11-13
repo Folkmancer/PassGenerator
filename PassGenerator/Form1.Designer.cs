@@ -1,4 +1,4 @@
-﻿namespace PassGenerator
+﻿namespace Folkmancer.Simple.PassGenerator
 {
     partial class Form1
     {
