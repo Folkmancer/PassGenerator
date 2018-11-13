@@ -8,18 +8,22 @@ namespace PassGenerator
         private string latin = "abcdefghijklmnopqrstuvwxyz";
         private string specialСhar = "!#$%&'()*+,-.:;<=>?@[]^_`{|}~";
         private string passSimbols;
-
+        
         public Generator(int typeSelected, bool digitsOn, bool latinOn, bool specialCharOn)
         {
-            if (digitsOn) passSimbols += digits;
+            if (digitsOn) passSimbols += Digits;
             if (latinOn)
             {
-                if (typeSelected == 0) passSimbols += latin;
-                else if (typeSelected == 1) passSimbols += latin.ToUpper();
-                else passSimbols += passSimbols += latin + latin.ToUpper();
+                if (typeSelected == 0) passSimbols += Latin;
+                else if (typeSelected == 1) passSimbols += Latin.ToUpper();
+                else passSimbols += passSimbols += Latin + Latin.ToUpper();
             }
-            if (specialCharOn) passSimbols += specialСhar;
+            if (specialCharOn) passSimbols += SpecialСhar;
         }
+
+        public string Digits { get => digits; }
+        public string Latin { get => latin; }
+        public string SpecialСhar { get => specialСhar; }
 
         public string GetPassword(int length)
         {
@@ -30,7 +34,20 @@ namespace PassGenerator
             {
                 password += passSimbols[index.Next(0, passSimbols.Length)];
             }
-            return password;
+            return password; 
         }
+    }
+
+    enum Case { Upper, Lower }
+
+    enum Type
+    {
+        Digit,
+        Letter,
+        Special,
+        DigitAndLetter,
+        DigitAndSpecial,
+        LetterAndSpecial,
+        All    
     }
 }
